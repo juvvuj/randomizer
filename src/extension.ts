@@ -1,27 +1,21 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { Commands } from './types';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "randomizer" is now active!');
+    // Collect all disposables.
+    const disposable: vscode.Disposable[] = [];
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('randomizer.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+    // Register the `randomizer.randNumber` command.
+    disposable.push(
+        vscode.commands.registerCommand(Commands.RANDOM_NUMBER, () => {
+            // Generate a random integer between 0-9
+            const number = Math.floor(Math.random() * 10);
+            vscode.window.showInformationMessage(`Random Number: ${number}`);
+        })
+    );
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from randomizer!');
-	});
-
-	context.subscriptions.push(disposable);
+    context.subscriptions.push(...disposable);
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

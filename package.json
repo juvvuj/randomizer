@@ -10,14 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:randomizer.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "randomizer.helloWorld",
-				"title": "Hello World"
+				"command": "randomizer.randNumber",
+				"title": "Randomizer: Random Number"
 			}
 		]
 	},
